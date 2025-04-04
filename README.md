@@ -169,6 +169,8 @@ spark = SparkSession.builder \
 
 sc = spark.sparkContext
 
+```
+
 ---
 
 ## ✈️ Data Description
