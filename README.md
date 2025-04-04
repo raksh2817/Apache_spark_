@@ -69,13 +69,13 @@ Spark's architecture is elegant yet powerful. It’s designed to manage distribu
 ## 🤔 Spark vs. The Rest — How It Stacks Up
 
 
-| Feature            | Apache Spark                           | Hadoop MapReduce                     | Apache Flink                    |
-|--------------------|----------------------------------------|--------------------------------------|----------------------------------|
-| **Speed**          | In-memory processing, very fast        | Disk-based, slower                   | Also fast, designed for streaming |
-| **Ease of Use**    | Simple APIs in multiple languages       | Java-heavy, complex APIs             | Java/Scala focused               |
-| **Processing Type**| Batch & real-time supported             | Batch only                           | Real-time optimized              |
-| **Ecosystem**      | SQL, MLlib, Streaming, GraphX           | Needs extra components               | Streaming-first design           |
-| **Fault Tolerance**| Lineage-based recovery                  | Replication-based                    | Checkpointing                    |
+| Feature            | Apache Spark                           | Hadoop MapReduce           |          
+|--------------------|----------------------------------------|----------------------------|
+| **Speed**          | In-memory processing, very fast        | Disk-based, slower         | 
+| **Ease of Use**    | Simple APIs in multiple languages       | Java-heavy, complex APIs  | 
+| **Processing Type**| Batch & real-time supported             | Batch only                | 
+| **Ecosystem**      | SQL, MLlib, Streaming, GraphX           | Needs extra components    | 
+| **Fault Tolerance**| Lineage-based recovery                  | Replication-based         | 
 
 ---
 
