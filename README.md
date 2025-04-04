@@ -1,10 +1,9 @@
 # Apache Spark Exploration Project
 
-**Course Name:** *Data Driven Development (IA 637)*  
-**Professor:** *(Professor’s Name)*  
-**Semester:** Spring 2025  
-**Due Date:** May 1, 2025  
-**Student:** Rakshith  
+  
+**Professor:** *Tyler J Conlon*  
+**Semester:** Spring 2025    
+**Student:** Rakshith Srinath
 
 ---
 
