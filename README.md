@@ -207,7 +207,7 @@ Think of this as a live logbook for each aircraft in the sky. Each snapshot capt
 
 ### 🛩️ Aircraft Model Reference Data
 
-This dataset complements the telemetry data by providing **aircraft-specific details** like manufacturer, model, and build year. It's used as a **lookup table** to enrich telemetry records, linked via the common aircraft identifier (`hex` / `icao`).
+This dataset complements the telemetry data by providing **aircraft-specific details** like manufacturer, model, and build year. It's used as a **lookup table** to enrich telemetry records, linked via the common aircraft identifier (`hex` / `icao`). 
 
 #### 🔑 Key Columns:
 
