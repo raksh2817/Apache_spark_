@@ -170,3 +170,59 @@ spark = SparkSession.builder \
 sc = spark.sparkContext
 
 
+## ✈️ Data Description
+
+This project uses real-world flight data sourced from an **ADS-B server** — a system that tracks aircraft via transponder signals. While the live feed updates daily, we’re working with **static snapshot extracts** so that our analysis remains consistent, repeatable, and benchmarkable.
+
+---
+
+### 🛰️ Flight Telemetry Data
+
+Think of this as a live logbook for each aircraft in the sky. Each snapshot captures multiple records of aircraft telemetry, with detailed flight data wrapped in a JSON format.
+
+**🔧 Format:** JSON  
+**📦 Structure:** Each entry includes a `timestamp` and a `payload` — a nested object holding detailed flight metrics.
+
+#### 🗝️ Key Fields Explained:
+
+- **`dt`** – Timestamp of when the data was captured.  
+- **`payload.hex`** – Aircraft’s unique 24-bit identifier (like a digital license plate).  
+- **`payload.alt_baro`** – Altitude measured using barometric pressure (in feet).  
+- **`payload.ias`** – Indicated Airspeed (what pilots see in the cockpit).  
+- **`payload.mach`** – Mach number, i.e., speed relative to the speed of sound.  
+- **`payload.mag_heading`** – Magnetic compass heading.  
+- **`payload.baro_rate` / `payload.geom_rate`** – Vertical speed rates via barometric and geometric sources.  
+- **`payload.nav_qnh`** – Atmospheric pressure setting used for altitude calibration.  
+- **`payload.nav_altitude_mcp` / `nav_altitude_fms`** – Navigation altitudes from different flight systems.  
+- **`payload.nav_modes`** – List of active autopilot/navigation modes.  
+- **`payload.mlat` / `payload.tisb`** – Supplemental data arrays (may be empty).  
+- **`payload.messages`** – Total number of messages received from the aircraft.  
+- **`payload.seen`** – Duration (in seconds) the aircraft was visible to the server.  
+- **`payload.rssi`** – Signal strength of the received messages.
+
+📌 *Note:* For easier analysis, these nested fields are **flattened** into top-level columns when loaded into Spark.
+
+---
+
+### 🛩️ Aircraft Model Reference Data
+
+This dataset complements the telemetry data by providing **aircraft-specific details** like manufacturer, model, and build year. It's used as a **lookup table** to enrich telemetry records, linked via the common aircraft identifier (`hex` / `icao`).
+
+#### 🔑 Key Columns:
+
+- **`icao`** – Aircraft's unique ICAO address (same as `payload.hex`).  
+- **`reg`** – Aircraft registration number (like its tail number).  
+- **`icatype`** – Aircraft type/class code.  
+- **`year`** – Manufacturing year (if available).  
+- **`manufacturer`** – Brand name (e.g., Airbus, Boeing).  
+- **`model`** – Specific aircraft model or variant.  
+- **`ownop`** – Ownership or operator info.  
+- **`faa_ladd`** – FAA privacy flag (true/false).  
+- **`short_type`** – Shortened aircraft classification.  
+- **`mil`** – Is it military? (true/false)
+
+---
+
+These two datasets — one for **real-time telemetry** and one for **aircraft metadata** — work together to provide a complete picture of flight operations. While the original data is refreshed daily, we’re working with selected **static snapshots** to perform controlled, scalable analysis at different data volumes.
+
+
