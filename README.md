@@ -4,6 +4,24 @@
 **Semester:** Spring 2025  
 **Student:** Rakshith Srinath
 
+## 📋 Table of Contents
+1. [Project Overview](#-project-overview)
+2. [Project Objectives](#-what-im-aiming-for)
+3. [Introduction to Apache Spark](#-a-quick-introduction-to-apache-spark)
+4. [Background & Rationale](#-background-why-spark-matters)
+5. [Spark Architecture](#-apache-spark-architecture--breaking-it-down)
+6. [Comparative Analysis](#-spark-vs-the-rest--how-it-stacks-up)
+7. [Installation Guide](#-installing-apache-spark-on-windows)
+   - [Java JDK Installation](#-step-1-install-java-jdk)
+   - [Python Installation](#-step-2-install-python)
+   - [Apache Spark Setup](#-step-3-download-apache-spark)
+   - [Hadoop Configuration](#-step-4-download-hadoop-winutils)
+   - [Environment Variables](#-step-5-configure-environment-variables)
+   - [Creating a SparkSession](#-step-5-starting-a-custom-sparksession-in-python)
+8. [Data Description](#-data-description)
+   - [Flight Telemetry Data](#-flight-telemetry-data)
+   - [Aircraft Model Reference Data](#-aircraft-model-reference-data)
+
 ---
 
 ## 📘 Project Overview
@@ -24,13 +42,13 @@ Welcome to my hands-on journey into the world of **Apache Spark**! This project 
 
 Apache Spark is an open-source, lightning-fast, distributed data processing framework. Its key strengths? Speed, simplicity, and scalability. From data wrangling to real-time analytics and machine learning — Spark covers it all!
 
-In this project, I’ll be exploring Spark’s ecosystem and architecture through guided experiments, sharing insights and challenges along the way.
+In this project, I'll be exploring Spark's ecosystem and architecture through guided experiments, sharing insights and challenges along the way.
 
 ---
 
 ## 🧠 Background: Why Spark Matters
 
-Originally created in 2009 by researchers at UC Berkeley, Apache Spark evolved as a faster, more flexible alternative to Hadoop’s MapReduce. Its in-memory data processing makes it ideal for iterative computations like machine learning and graph processing.
+Originally created in 2009 by researchers at UC Berkeley, Apache Spark evolved as a faster, more flexible alternative to Hadoop's MapReduce. Its in-memory data processing makes it ideal for iterative computations like machine learning and graph processing.
 
 ### 🧾 Why I Chose Apache Spark
 
@@ -42,7 +60,7 @@ Originally created in 2009 by researchers at UC Berkeley, Apache Spark evolved a
 
 ## 🧱 Apache Spark Architecture — Breaking It Down
 
-Spark's architecture is elegant yet powerful. It’s designed to manage distributed data across multiple nodes in a cluster seamlessly.
+Spark's architecture is elegant yet powerful. It's designed to manage distributed data across multiple nodes in a cluster seamlessly.
 
 ![Apache Spark Architecture](spark_architecture.png)
 
@@ -72,90 +90,74 @@ Spark's architecture is elegant yet powerful. It’s designed to manage distribu
 | Feature            | Apache Spark                           | Hadoop MapReduce           |          
 |--------------------|----------------------------------------|----------------------------|
 | **Speed**          | In-memory processing, very fast        | Disk-based, slower         | 
-| **Ease of Use**    | Simple APIs in multiple languages       | Java-heavy, complex APIs  | 
-| **Processing Type**| Batch & real-time supported             | Batch only                | 
-| **Ecosystem**      | SQL, MLlib, Streaming, GraphX           | Needs extra components    | 
-| **Fault Tolerance**| Lineage-based recovery                  | Replication-based         | 
+| **Ease of Use**    | Simple APIs in multiple languages      | Java-heavy, complex APIs   | 
+| **Processing Type**| Batch & real-time supported            | Batch only                 | 
+| **Ecosystem**      | SQL, MLlib, Streaming, GraphX          | Needs extra components     | 
+| **Fault Tolerance**| Lineage-based recovery                 | Replication-based          | 
+
+> **✅ Verdict:** Spark is a flexible, high-performance solution ideal for modern data workflows.
 
 ---
 
-✅ Verdict: Spark is a flexible, high-performance solution ideal for modern data workflows.
+## 🛠️ Installing Apache Spark on Windows
 
----
+Here's a simple, step-by-step setup guide for getting Spark up and running on Windows:
 
-# 🛠️ Installing Apache Spark on Windows
+### ✅ Step 1: Install Java JDK
 
-Here’s a simple, step-by-step setup guide for getting Spark up and running on Windows:
-
----
-
-## ✅ Step 1: Install Java JDK
-
-- Download JDK from [Adoptium](https://adoptium.net/)
-- Move it to: `C:\Java\jdk`
-- To verify, open **Command Prompt** and run:
+1. Download JDK from [Adoptium](https://adoptium.net/)
+2. Move it to: `C:\Java\jdk`
+3. To verify, open **Command Prompt** and run:
 
 ```bash
 java -version
 ```
 
----
+### ✅ Step 2: Install Python
 
-## ✅ Step 2: Install Python
-
-- Grab Python (3.x) from [python.org](https://www.python.org/downloads/)
-- During installation, **check** the box that says: `Add Python to PATH`
-- To verify, open Command Prompt and run:
+1. Grab Python (3.x) from [python.org](https://www.python.org/downloads/)
+2. During installation, **check** the box that says: `Add Python to PATH`
+3. To verify, open Command Prompt and run:
 
 ```bash
 python --version
 ```
 
----
+### ✅ Step 3: Download Apache Spark
 
-## ✅ Step 3: Download Apache Spark
+1. Visit [Apache Spark Downloads](https://spark.apache.org/downloads.html)
+2. Select version: `Spark 3.5.1 (latest stable)`
+3. Choose: `Pre-built for Apache Hadoop 3.3 or later`
+4. Extract and move folder to: `C:\Spark`
 
-- Visit [Apache Spark Downloads](https://spark.apache.org/downloads.html)
-- Select version: `Spark 3.5.1 (latest stable)`
-- Choose: `Pre-built for Apache Hadoop 3.3 or later`
-- Extract and move folder to: `C:\Spark`
+### ✅ Step 4: Download Hadoop (winutils.exe)
 
----
+1. Download from [Hadoop Winutils GitHub](https://github.com/steveloughran/winutils)
+2. Extract and move to: `C:\Hadoop\bin`
 
-## ✅ Step 4: Download Hadoop (winutils.exe)
-
-- Download from [Hadoop Winutils GitHub](https://github.com/steveloughran/winutils)
-- Extract and move to: `C:\Hadoop\bin`
-
----
-
-## ✅ Step 5: Configure Environment Variables
+### ✅ Step 5: Configure Environment Variables
 
 1. Right-click **"This PC"** → **"Properties"**
 2. Click **"Advanced system settings"** → **"Environment Variables"**
 3. Add the following **System Variables**:
 
 | Variable Name | Value                                |
-|---------------|----------------------------------------|
+|---------------|--------------------------------------|
 | JAVA_HOME     | `C:\Java\jdk-<your-version>`         |
 | SPARK_HOME    | `C:\Spark`                           |
-| HADOOP_HOME   | `C:\Hadoop\bin`                     |
+| HADOOP_HOME   | `C:\Hadoop\bin`                      |
 
-> ✨ Replace `<your-version>` with your actual JDK folder name (e.g., `jdk-17`).
+> ✨ **Pro Tip:** Replace `<your-version>` with your actual JDK folder name (e.g., `jdk-17`).
 
-That’s it! You’re ready to run your first Apache Spark application. 💻
+That's it! You're ready to run your first Apache Spark application. 💻
 
----
-
-## 🛠️✅ Step 5: Starting a Custom SparkSession in Python
+### ✅ Step 6: Starting a Custom SparkSession in Python
 
 You can manually start Apache Spark within a Python script using the `pyspark` library.
 
 This gives you full control over Spark configurations and is useful when writing data processing scripts locally.
 
----
-
-### ✅ Sample Python Script
+#### Sample Python Script
 
 Create a new `.py` file (for example: `start_spark.py`) and add the following code:
 
@@ -168,16 +170,13 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 sc = spark.sparkContext
-
 ```
 
 ---
 
 ## ✈️ Data Description
 
-This project uses real-world flight data sourced from an **ADS-B server** — a system that tracks aircraft via transponder signals. While the live feed updates daily, we’re working with **static snapshot extracts** so that our analysis remains consistent, repeatable, and benchmarkable.
-
----
+This project uses real-world flight data sourced from an **ADS-B server** — a system that tracks aircraft via transponder signals. While the live feed updates daily, we're working with **static snapshot extracts** so that our analysis remains consistent, repeatable, and benchmarkable.
 
 ### 🛰️ Flight Telemetry Data
 
@@ -189,7 +188,7 @@ Think of this as a live logbook for each aircraft in the sky. Each snapshot capt
 #### 🗝️ Key Fields Explained:
 
 - **`dt`** – Timestamp of when the data was captured.  
-- **`payload.hex`** – Aircraft’s unique 24-bit identifier (like a digital license plate).  
+- **`payload.hex`** – Aircraft's unique 24-bit identifier (like a digital license plate).  
 - **`payload.alt_baro`** – Altitude measured using barometric pressure (in feet).  
 - **`payload.ias`** – Indicated Airspeed (what pilots see in the cockpit).  
 - **`payload.mach`** – Mach number, i.e., speed relative to the speed of sound.  
@@ -204,8 +203,6 @@ Think of this as a live logbook for each aircraft in the sky. Each snapshot capt
 - **`payload.rssi`** – Signal strength of the received messages.
 
 📌 *Note:* For easier analysis, these nested fields are **flattened** into top-level columns when loaded into Spark.
-
----
 
 ### 🛩️ Aircraft Model Reference Data
 
@@ -226,6 +223,4 @@ This dataset complements the telemetry data by providing **aircraft-specific det
 
 ---
 
-These two datasets — one for **real-time telemetry** and one for **aircraft metadata** — work together to provide a complete picture of flight operations. While the original data is refreshed daily, we’re working with selected **static snapshots** to perform controlled, scalable analysis at different data volumes.
-
-
+These two datasets — one for **real-time telemetry** and one for **aircraft metadata** — work together to provide a complete picture of flight operations. While the original data is refreshed daily, we're working with selected **static snapshots** to perform controlled, scalable analysis at different data volumes.
