@@ -147,4 +147,26 @@ That’s it! You’re ready to run your first Apache Spark application. 💻
 
 ---
 
-Stay tuned for the next part of the project — where I’ll start running code, processing real datasets, and sharing what I learn as I go!
+## 🛠️✅ Step 5: Starting a Custom SparkSession in Python
+
+You can manually start Apache Spark within a Python script using the `pyspark` library.
+
+This gives you full control over Spark configurations and is useful when writing data processing scripts locally.
+
+---
+
+### ✅ Sample Python Script
+
+Create a new `.py` file (for example: `start_spark.py`) and add the following code:
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("MyLocalSparkApp") \
+    .master("local[*]") \
+    .getOrCreate()
+
+sc = spark.sparkContext
+
+
