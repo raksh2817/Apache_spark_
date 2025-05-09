@@ -361,4 +361,12 @@ spark.sql("""
 #I will add more comparison analysis 
 i have results in my jupiter files 
 
+| Feature            | **Apache Spark**               | **Pandas**                     | **DuckDB**                     |
+| ------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| **Speed**          | ⚡ Great for big data workloads | ⚡ Fast for small datasets      | ⚡ Extremely fast on local data |
+| **Syntax**         | SQL-like & DataFrame API       | Pythonic and intuitive         | Pure SQL                       |
+| **Scalability**    | Distributed, cluster-ready     | Single-machine, memory-bound   | Local only, but optimized      |
+| **Ease of Setup**  | Requires Java, Hadoop config   | Very easy (just `pip install`) | Very easy (just `pip install`) |
+| **Best Use Case**  | ETL pipelines, streaming, ML   | Prototyping, quick analysis    | OLAP-style analytics, SQL work |
+| **Storage Format** | Supports Parquet, ORC, Delta   | In-memory or file-based        | In-memory or Parquet           |
 
