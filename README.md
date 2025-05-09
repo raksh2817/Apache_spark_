@@ -22,6 +22,7 @@
    - [Flight Telemetry Data](#-flight-telemetry-data)
    - [Aircraft Model Reference Data](#-aircraft-model-reference-data)
 9. [Basic Spark Queries](#-Basic-Spark-Queries)
+10. [Spark vs Pandas vs DuckDB results comparison] (#- Spark-Pandas-DuckDB-comparision)
 
 ---
 
@@ -350,3 +351,9 @@ spark.sql("""
     ORDER BY flight_count DESC
     LIMIT 5
 """).show()
+ 
+
+-----
+
+## Spark-Pandas-DuckDB-comparision 
+
