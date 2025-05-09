@@ -288,25 +288,65 @@ df_spark_small_flat.show(5, truncate=False)
 # Count total number of records
 df_spark_small_flat.count()
 
-+-------+---------+------------+-----------+--------------+-----+-----------+--------+----------+--------+-------------+------------------+------------+-----------+------------+----+----+--------+-------+---------+---------+------+------+
-|hex    |alt_baro |ground_speed|track      |lat           |lon  |nav_qnh    |nav_altitude_mcp |...     |
-+-------+---------+------------+-----------+--------------+-----+-----------+------------------+--------+
-|ab35d3 |37000    |552.7       |41.3       |44.218048     |-75.7|1013.25    |34000             |...     |
-|...    |...      |...         |...        |...           |...  |...        |...               |...     |
-+-------+---------+------------+-----------+--------------+-----+-----------+------------------+--------+
-
-Total records: 1,829,647
-
 # to select records 
 df_spark_small_flat.select("hex", "alt_baro", "ground_speed", "track", "lat", "lon") \
                    .show(5, truncate=False)
 
-+-------+---------+--------------+-------+-----------+-----------+
-| hex   | alt_baro| ground_speed | track | lat       | lon       |
-+-------+---------+--------------+-------+-----------+-----------+
-| ab35d3| 37000   | 552.7        | 41.3  | 44.218048 | -75.741316|
-| c63f37| 23925   | 352.3        | 22.7  | 44.900875 | -75.38511 |
-| c06a75| 24975   | 482.1        | 45.7  | 45.762677 | -75.108152|
-| c0878a| 15175   | 420.6        | 48.1  | 45.029551 | -74.698661|
-| c027da| 30000   | 343.8        | 229.1 | 44.001297 | -75.327695|
-+-------+---------+--------------+-------+-----------+-----------+
+# to filter records 
+
+df_spark_small_flat.filter(col("alt_baro") > 30000) \
+                   .select("hex", "alt_baro", "ground_speed") \
+                   .show(5)
+
+# to count records per group
+
+df_spark_small_flat.groupBy("hex") \
+                   .count() \
+                   .orderBy("count", ascending=False) \
+                   .show(5)
+
+# to find out avg per group 
+
+df_spark_small_flat.groupBy("hex") \
+                   .agg(avg("ground_speed").alias("avg_speed")) \
+                   .orderBy("avg_speed", ascending=False) \
+                   .show(5)
+
+# to add new column 
+
+df_spark_small_flat.withColumn("speed_knots", round(col("ground_speed") * 0.539957, 2)) \
+                   .select("hex", "ground_speed", "speed_knots") \
+                   .show(5)
+
+# to join 2 datasets 
+
+df_joined = df_spark_small_flat.join(
+    df_aircraft,
+    df_spark_small_flat.hex == df_aircraft.icao,
+    how="left"
+)
+
+df_joined.select("hex", "alt_baro", "manufacturer", "model", "reg").show(5)
+
+# using spark sql 
+
+df_spark_small_flat.createOrReplaceTempView("flights")
+
+#to select flights flying above 30,000 ft
+ 
+spark.sql("""
+    SELECT hex, alt_baro, ground_speed
+    FROM flights
+    WHERE alt_baro > 30000
+    LIMIT 5
+""").show()
+
+# count total flights per aircraft 
+
+spark.sql("""
+    SELECT hex, COUNT(*) as flight_count
+    FROM flights
+    GROUP BY hex
+    ORDER BY flight_count DESC
+    LIMIT 5
+""").show()
