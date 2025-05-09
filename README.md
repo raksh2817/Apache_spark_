@@ -21,6 +21,7 @@
 8. [Data Description](#-data-description)
    - [Flight Telemetry Data](#-flight-telemetry-data)
    - [Aircraft Model Reference Data](#-aircraft-model-reference-data)
+9. [Basic Spark Queries](#-Basic-Spark-Queries)
 
 ---
 
@@ -224,3 +225,58 @@ This dataset complements the telemetry data by providing **aircraft-specific det
 ---
 
 These two datasets — one for **real-time telemetry** and one for **aircraft metadata** — work together to provide a complete picture of flight operations. While the original data is refreshed daily, we're working with selected **static snapshots** to perform controlled, scalable analysis at different data volumes.
+
+
+
+---
+
+## 🧮 Basic Spark Queries
+
+Once Spark is configured, running basic queries is a great way to explore its capabilities. Using the `DataFrame API` or `Spark SQL`, we can perform typical data operations efficiently.
+
+Here’s a glimpse into commonly used queries:
+
+```python
+# Load full telemetry and extract all payload fields in Spark
+df_spark_small = spark.read.json(small_telemetry_path)
+
+# Show schema
+df_flight.printSchema()
+
+# to Flatten 
+from pyspark.sql.functions import col
+
+df_spark_small_flat = df_flight.select(
+    col("dt").alias("timestamp"),
+    col("payload.hex").alias("hex"),
+    col("payload.alt_baro").alias("alt_baro"),
+    col("payload.alt_geom").alias("alt_geom"),
+    col("payload.gs").alias("ground_speed"),
+    col("payload.track").alias("track"),
+    col("payload.baro_rate").alias("baro_rate"),
+    col("payload.squawk").alias("squawk"),
+    col("payload.emergency").alias("emergency"),
+    col("payload.category").alias("category"),
+    col("payload.nav_qnh").alias("nav_qnh"),
+    col("payload.nav_altitude_mcp").alias("nav_altitude_mcp"),
+    col("payload.nav_heading").alias("nav_heading"),
+    col("payload.lat").alias("lat"),
+    col("payload.lon").alias("lon"),
+    col("payload.nic").alias("nic"),
+    col("payload.rc").alias("rc"),
+    col("payload.seen_pos").alias("seen_pos"),
+    col("payload.version").alias("version"),
+    col("payload.nic_baro").alias("nic_baro"),
+    col("payload.nac_p").alias("nac_p"),
+    col("payload.nac_v").alias("nac_v"),
+    col("payload.sil").alias("sil"),
+    col("payload.sil_type").alias("sil_type"),
+    col("payload.gva").alias("gva"),
+    col("payload.sda").alias("sda"),
+    col("payload.mlat").alias("mlat"),
+    col("payload.tisb").alias("tisb"),
+    col("payload.messages").alias("messages"),
+    col("payload.seen").alias("seen"),
+    col("payload.rssi").alias("rssi"),
+    col("payload.flight").alias("flight")
+)
