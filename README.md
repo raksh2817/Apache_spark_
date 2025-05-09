@@ -159,6 +159,10 @@ You can manually start Apache Spark within a Python script using the `pyspark` l
 
 This gives you full control over Spark configurations and is useful when writing data processing scripts locally.
 
+### Below is the video to install the same on your Windows 
+
+![Apache Spark Installation Tutorial](install_tut_old.mp4)
+
 #### Sample Python Script
 
 Create a new `.py` file (for example: `start_spark.py`) and add the following code:
