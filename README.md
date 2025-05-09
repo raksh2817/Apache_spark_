@@ -161,7 +161,7 @@ This gives you full control over Spark configurations and is useful when writing
 
 ### Below is the video to install the same on your Windows 
 
-![Apache Spark Installation Tutorial](install_tut_old.mp4)
+![Watch Apache Spark Installation Tutorial](videos/install_tut_old.mp4)
 
 #### Sample Python Script
 
