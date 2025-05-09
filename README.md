@@ -363,7 +363,7 @@ i have results in my jupiter files
 
 | Feature            | **Apache Spark**               | **Pandas**                     | **DuckDB**                     |
 | ------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| **Speed**          | ⚡ Great for big data workloads | ⚡ Fast for small datasets      | ⚡ Extremely fast on local data |
+| **Speed**          |  Great for big data workloads |  Fast for small datasets      |  Extremely fast on local data |
 | **Syntax**         | SQL-like & DataFrame API       | Pythonic and intuitive         | Pure SQL                       |
 | **Scalability**    | Distributed, cluster-ready     | Single-machine, memory-bound   | Local only, but optimized      |
 | **Ease of Setup**  | Requires Java, Hadoop config   | Very easy (just `pip install`) | Very easy (just `pip install`) |
